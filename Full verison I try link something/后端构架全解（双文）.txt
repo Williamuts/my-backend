@@ -1,0 +1,276 @@
+🌍 E1 Recycling Platform - 后端架构全解
+这是一个基于 .NET Core Web API 构建的废品回收平台后端系统。它采用分层架构，主要由 Controllers (控制器)、Models (数据模型)、Services (服务) 和 Middlewares (中间件) 组成。
+
+1. 📂 Controllers (业务指挥中心)
+作用：后端的“前台”。负责接收 APP 发来的 HTTP 请求，调用业务逻辑，并返回结果。
+
+IncidentController.cs (核心业务 - 回收订单)
+
+业务：处理用户的**“上门回收请求” (Pickup Request)**。
+
+功能：当用户有废品要卖时，提交照片、GPS 坐标和描述。该控制器接收这些“订单”，并负责更新订单状态（如：Submitted 已提交 -> In Progress 处理中 -> Completed 已完成）。
+
+RecyclingGuideController.cs (教育模块)
+
+业务：管理 APP 里的“回收指南”页面。
+
+功能：提供 YouTube 教学视频链接、文章跳转链接和分类图标，教用户如何正确分类废品。
+
+RecyclingController.cs (地图服务)
+
+业务：管理公共回收站点的地理位置。
+
+功能：提供站点的经纬度数据，方便前端在 Google Maps 上标记出最近的回收点。
+
+AdminController.cs (后台管理)
+
+业务：管理员专用的权限管理接口。
+
+功能：查看所有用户列表、任命新的管理员 (Promote)、或删除违规用户。
+
+AuthController.cs (安全入口)
+
+业务：认证系统。
+
+功能：处理注册、登录、忘记密码。它负责发放 JWT 令牌，并结合数据库逻辑实现“单设备强制登录”机制。
+
+ProfileController.cs (个人中心)
+
+业务：用户资料管理。
+
+功能：允许用户查看或修改自己的昵称、头像等信息。
+
+NotificationsController.cs (消息推送)
+
+业务：集成 Firebase (FCM)。
+
+功能：给用户手机发送弹窗通知（例如通知用户：“回收人员已出发”）。
+
+AiController.cs (智能识别)
+
+业务：AI 辅助功能。
+
+功能：处理图像识别请求（例如自动识别用户上传的照片是塑料还是纸张）。
+
+2. 📂 Middlewares (安全拦截器)
+作用：走廊上的“安检门”。请求到达 Controller 之前必须经过这里。
+
+SingleSessionMiddleware.cs (设备安全锁)
+
+功能：它拦截每一个请求，检查用户持有的 Token 是否与数据库里的 CurrentSessionToken 一致。
+
+目的：实现单设备登录。如果用户在第二台手机登录，数据库标记会更新，这个中间件会立刻识别出第一台手机的 Token 已失效，并强制其下线 (返回 401)。
+
+3. 📂 Models (数据模型层)
+作用：定义数据的结构。分为“数据库实体”和“数据传输对象”两类。
+
+A. Entities (数据库表结构 - 存入数据库的)
+
+IncidentReport.cs (回收订单表)
+
+存储核心业务数据：谁 (UserId)、在哪 (Lat/Lon)、什么废品 (PhotoUrl/Description)、当前进度 (Status)。
+
+ApplicationUser.cs (用户表)
+
+继承自系统用户，额外增加了 CurrentSessionToken 字段，专门用于防多设备登录。
+
+RecyclingGuide.cs (指南内容表)
+
+存储视频 URL、文章 URL、图标 URL 和标题。
+
+RecyclingSite.cs (站点表)
+
+存储回收站的名字和经纬度坐标。
+
+UserDevice.cs (设备表)
+
+存储用户的 Firebase Token，用于精准推送通知给特定手机。
+
+B. DTOs (数据传输对象 - 前后端交互用的“小纸条”)
+
+AuthDtos.cs (认证数据包)
+
+作用：定义注册/登录时的表单格式。例如 LoginModel 只包含邮箱和密码，干净利落。
+
+IncidentHistoryDto.cs (历史订单简报)
+
+作用：专用于“我的订单列表”页面。
+
+区别：它比完整的 IncidentReport 更轻量，只包含列表需要显示的字段（如日期、缩略图、状态），为了提高 APP 加载速度。
+
+ProfileDtos.cs (个人资料包)
+
+作用：定义用户修改资料时允许提交的数据。
+
+安全性：防止用户在修改资料时恶意篡改敏感字段（如余额或管理员权限）。
+
+RecyclingGuideDtos.cs (指南创建包)
+
+作用：管理员在后台添加新视频时填写的数据格式。
+
+4. 📂 Services (服务层)
+作用：封装复杂的外部逻辑。
+
+GmailEmailService.cs (邮件投递员)
+
+功能：封装 SMTP 协议，通过 Gmail 服务器给用户发送验证码或系统通知。
+
+IEmailService.cs (接口标准)
+
+功能：定义发邮件必须有哪些参数（收件人、标题、内容），方便代码解耦。
+
+5. 核心配置文件 (地基)
+Program.cs (启动入口)
+
+功能：程序的总开关。配置数据库连接、注册所有服务、启用中间件，以及程序启动时自动设置管理员 (Seeding)。
+
+app.db (数据库)
+
+功能：SQLite 数据库文件，所有数据（用户、订单、视频链接）都在这里。
+
+firebase-admin-key.json (推送密钥)
+
+功能：连接 Google Firebase 服务的“通行证”。
+
+
+🌍 E1 Recycling Platform - Backend Architecture Explained
+
+This is a backend system for a waste recycling platform built on the .NET Core Web API. It adopts a layered architecture, primarily composed of Controllers, Models, Services, and Middlewares.
+
+1. 📂 Controllers (Business Command Center)
+
+Role: The "front end" of the backend. Responsible for receiving HTTP requests from the app, invoking business logic, and returning results.
+
+IncidentController.cs (Core Business - Recycling Orders)
+
+Business: Handles users' **"Pickup Requests"**.
+
+Function: When a user has waste to sell, they submit photos, GPS coordinates, and a description. This controller receives these "orders" and is responsible for updating the order status (e.g., Submitted -> In Progress -> Completed).
+
+RecyclingGuideController.cs (Education Module)
+
+Business Function: Manages the "Recycling Guide" page within the app.
+
+Function: Provides links to YouTube tutorial videos, article links, and category icons to teach users how to properly sort recyclables.
+
+
+RecyclingController.cs (Map Service)
+
+Business Function: Manages the geographic locations of public recycling stations.
+
+Function: Provides the latitude and longitude data of each station, allowing the frontend to mark the nearest recycling point on Google Maps.
+
+
+AdminController.cs (Admin Panel)
+
+Business Function: A dedicated permission management interface for administrators.
+
+Function: Allows users to view the entire user list, appoint new administrators (Promote), or delete users who violate regulations.
+
+
+AuthController.cs (Security Entry Point)
+
+Business Function: Authentication system.
+
+Function: Handles registration, login, and forgotten password handling. It issues JWT tokens and implements a "forced login on a single device" mechanism based on database logic.
+
+
+ProfileController.cs (Personal Center)
+
+Business Function: User profile management.
+
+Functionality: Allows users to view or modify their nickname, avatar, and other information.
+
+NotificationsController.cs (Push Notifications)
+
+Business Functionality: Integrates with Firebase (FCM).
+
+Functionality: Sends pop-up notifications to users' phones (e.g., notifying users that "recycling personnel have departed").
+
+AiController.cs (Intelligent Recognition)
+
+Business Functionality: AI-assisted functionality.
+
+Functionality: Handles image recognition requests (e.g., automatically identifying whether a user-uploaded photo is plastic or paper).
+
+2. 📂 Middlewares (Security Interceptors)
+
+Functionality: Like a "security gate" in a corridor. Requests must pass through here before reaching the Controller.
+
+SingleSessionMiddleware.cs (Device Security Lock)
+
+Functionality: Intercepts every request and checks if the user's token matches the CurrentSessionToken in the database.
+
+Purpose: Enables single-device login. If a user logs in on a second phone, the database flag will be updated, and this middleware will immediately recognize that the first phone's token has expired and force it offline (returning a 401 error). 3. 📂 Models (Data Model Layer)
+
+Purpose: Defines the data structure. Divided into two categories: "Database Entities" and "Data Transfer Objects".
+
+A. Entities (Database Table Structure - Storing Data in the Database)
+
+IncidentReport.cs (Recycling Order Table)
+
+Stores core business data: Who (UserId), Where (Lat/Lon), What kind of waste (PhotoUrl/Description), Current progress (Status).
+
+ApplicationUser.cs (User Table)
+
+Inherits from the system user table, with an additional CurrentSessionToken field specifically for preventing multi-device login.
+
+RecyclingGuide.cs (Guide Content Table)
+
+Stores video URLs, article URLs, icon URLs, and titles.
+
+RecyclingSite.cs (Site Table)
+
+Stores the name and latitude/longitude coordinates of the recycler station.
+
+UserDevice.cs (Device Table)
+
+Stores the user's Firebase Token for targeted push notifications to specific mobile phones.
+
+B. Data Transfer Objects (DTOs) - "Small notes" used for front-end and back-end interaction
+
+AuthDtos.cs (Authentication Data Package)
+
+Purpose: Defines the form format for registration/login. For example, LoginModel only contains email and password, keeping it clean and concise.
+
+IncidentHistoryDto.cs (Order History Briefing)
+
+Purpose: Dedicated to the "My Orders List" page.
+
+Difference: It is lighter than the full IncidentReport, containing only the fields needed for the list to display (such as date, thumbnail, status), to improve app loading speed.
+
+ProfileDtos.cs (Personal Profile Package)
+
+Purpose: Defines the data allowed to be submitted when users modify their profiles.
+
+Security: Prevents users from maliciously tampering with sensitive fields (such as balance or administrator privileges) when modifying their profiles.
+
+RecyclingGuideDtos.cs (Guide Creation Package)
+
+Purpose: The data format filled in by administrators when adding new videos in the backend.
+
+4. 📂 Services (Service Layer)
+
+Purpose: Encapsulates complex external logic.
+
+GmailEmailService.cs (Email Delivery Personnel)
+
+Function: Encapsulates the SMTP protocol to send verification codes or system notifications to users via the Gmail server.
+
+IEmailService.cs (Interface Standard)
+
+Function: Defines the parameters required for sending emails (recipient, subject, content), facilitating code decoupling.
+
+5. Core Configuration Files (Foundation)
+
+Program.cs (Startup Entry Point)
+
+Function: The program's master switch. Configures database connections, registers all services, enables middleware, and automatically sets the administrator (Seeding) upon program startup.
+
+app.db (Database)
+
+Function: SQLite database file; all data (users, orders, video links) is stored here.
+
+firebase-admin-key.json (Push Key)
+
+Function: The "passport" for connecting to Google Firebase services.
