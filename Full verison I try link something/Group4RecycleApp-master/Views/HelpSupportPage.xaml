@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.HelpSupportPage"
+             Title="Help &amp; Support"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F5F5F5">
+
+    <VerticalStackLayout Spacing="20" Padding="20">
+        <Grid ColumnDefinitions="Auto, *">
+            <Button Text="&lt;" BackgroundColor="Transparent" TextColor="Black" FontSize="24" Command="{Binding GoBackCommand}" Padding="0" HorizontalOptions="Start"/>
+            <Label Grid.Column="1" Text="Help &amp; Support" FontSize="20" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" Margin="-40,0,0,0" HorizontalOptions="Center"/>
+        </Grid>
+
+        <Label Text="How can we help you?" FontSize="18" FontAttributes="Bold" TextColor="Black" Margin="0,10"/>
+
+        <Frame BackgroundColor="White" CornerRadius="15" Padding="15">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ContactSupportCommand}"/>
+            </Frame.GestureRecognizers>
+            <Grid ColumnDefinitions="*, Auto">
+                <VerticalStackLayout>
+                    <Label Text="Contact Us" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="Email our support team" FontSize="12" TextColor="Gray"/>
+                </VerticalStackLayout>
+                <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
+            </Grid>
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="15" Padding="15">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding OpenTermsCommand}"/>
+            </Frame.GestureRecognizers>
+            <Grid ColumnDefinitions="*, Auto">
+                <Label Text="Terms &amp; Privacy Policy" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center"/>
+                <Label Grid.Column="1" Text=">" VerticalOptions="Center" TextColor="Gray"/>
+            </Grid>
+        </Frame>
+
+    </VerticalStackLayout>
+</ContentPage>

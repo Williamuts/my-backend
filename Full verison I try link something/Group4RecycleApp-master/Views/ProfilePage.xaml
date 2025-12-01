@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.ProfilePage"
+             Title="Profile"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4F9F6">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="25">
+
+            <Label Text="Profile" FontSize="24" FontAttributes="Bold" TextColor="#2D3E50" HorizontalOptions="Center" Margin="0,10"/>
+
+            <Frame BackgroundColor="White" CornerRadius="30" Padding="25" HasShadow="True" BorderColor="Transparent">
+                <VerticalStackLayout Spacing="10">
+                    <Frame HeightRequest="80" WidthRequest="80" CornerRadius="40" Padding="0" IsClippedToBounds="True" HorizontalOptions="Center" BorderColor="#00C569">
+                        <Image Source="dotnet_bot.png" Aspect="AspectFill"/>
+                    </Frame>
+                    <Label Text="{Binding UserName}" FontAttributes="Bold" FontSize="20" TextColor="#2D3E50" HorizontalOptions="Center"/>
+                    <Label Text="{Binding UserEmail}" TextColor="Gray" FontSize="14" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <VerticalStackLayout Spacing="15">
+                <Frame BackgroundColor="White" CornerRadius="20" Padding="15" HasShadow="True" BorderColor="Transparent">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToSettingsCommand}"/>
+                    </Frame.GestureRecognizers>
+                    <Grid ColumnDefinitions="45, *, Auto">
+                        <Frame BackgroundColor="#E8F5E9" Padding="8" CornerRadius="12" HasShadow="False">
+                            <Image Source="icon_user_circle.png" Aspect="AspectFit"/>
+                        </Frame>
+                        <Label Grid.Column="1" Text="Account Settings" TextColor="#2D3E50" FontAttributes="Bold" VerticalOptions="Center" Margin="15,0,0,0"/>
+                        <Label Grid.Column="2" Text=">" TextColor="Gray" VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+                <Frame BackgroundColor="White" CornerRadius="20" Padding="15" HasShadow="True" BorderColor="Transparent">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToSupportCommand}"/>
+                    </Frame.GestureRecognizers>
+                    <Grid ColumnDefinitions="45, *, Auto">
+                        <Frame BackgroundColor="#E8F5E9" Padding="8" CornerRadius="12" HasShadow="False">
+                            <Image Source="icon_question.png" Aspect="AspectFit"/>
+                        </Frame>
+                        <Label Grid.Column="1" Text="Help &amp; Support" TextColor="#2D3E50" FontAttributes="Bold" VerticalOptions="Center" Margin="15,0,0,0"/>
+                        <Label Grid.Column="2" Text=">" TextColor="Gray" VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+                <Frame BackgroundColor="#FFF5F5" CornerRadius="20" Padding="15" HasShadow="True" BorderColor="Transparent">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
+                    </Frame.GestureRecognizers>
+                    <Grid ColumnDefinitions="45, *, Auto">
+                        <Frame BackgroundColor="#FFE0E0" Padding="8" CornerRadius="12" HasShadow="False">
+                            <Image Source="icon_logout.png" Aspect="AspectFit"/>
+                        </Frame>
+                        <Label Grid.Column="1" Text="Logout" TextColor="#D32F2F" FontAttributes="Bold" VerticalOptions="Center" Margin="15,0,0,0"/>
+                    </Grid>
+                </Frame>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

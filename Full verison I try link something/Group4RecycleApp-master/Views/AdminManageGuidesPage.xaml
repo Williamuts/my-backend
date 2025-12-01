@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.AdminManageGuidesPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4F9F6">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Grid ColumnDefinitions="Auto, *">
+            <Button Text="&lt;" BackgroundColor="Transparent" TextColor="Black" FontSize="24" Command="{Binding GoBackCommand}"/>
+            <Label Grid.Column="1" Text="Manage Guides" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="-40,0,0,0"/>
+        </Grid>
+
+        <CollectionView ItemsSource="{Binding Guides}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="0,0,0,15" CornerRadius="15" Padding="15">
+                        <Grid ColumnDefinitions="Auto, *, Auto">
+                            <Frame Grid.Column="0" BackgroundColor="{Binding Color}" HeightRequest="40" WidthRequest="40" CornerRadius="10" Padding="8">
+                                <Image Source="{Binding Icon}"/>
+                            </Frame>
+
+                            <Label Grid.Column="1" Text="{Binding Title}" VerticalOptions="Center" Margin="10,0,0,0" FontAttributes="Bold"/>
+
+                            <Button Grid.Column="2" Text="Edit" FontSize="12" HeightRequest="35" CornerRadius="10" BackgroundColor="#00C569" TextColor="White"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AdminManageGuidesViewModel}}, Path=EditGuideCommand}"
+                                    CommandParameter="{Binding .}"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

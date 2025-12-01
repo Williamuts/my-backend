@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.DashboardPage"
+             Title="Home"
+             BackgroundColor="#F2F7F5" 
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="25">
+
+            <Frame BackgroundColor="White" 
+                   CornerRadius="25" 
+                   Padding="20" 
+                   HorizontalOptions="Fill" 
+                   HasShadow="True" 
+                   BorderColor="#E8F5E9">
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="Welcome back," 
+                           TextColor="Gray" 
+                           FontSize="14" 
+                           HorizontalOptions="Center"/>
+                    <Label Text="{Binding UserName}" 
+                           TextColor="#00C569" 
+                           FontSize="22" 
+                           FontAttributes="Bold" 
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Grid RowDefinitions="150, 150" ColumnDefinitions="*, *" ColumnSpacing="15" RowSpacing="15">
+
+                <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                       CornerRadius="20" 
+                       HasShadow="True" 
+                       BackgroundColor="White" 
+                       BorderColor="#E8F5E9">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToRecycleCommand}"/>
+                    </Frame.GestureRecognizers>
+
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="12">
+                        <Image Source="icon_recycle_bin.png" HeightRequest="55" WidthRequest="55" Aspect="AspectFit"/>
+                        <Label Text="Recycle Wastes" TextColor="#333333" FontSize="16" FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="0" 
+                       CornerRadius="20" 
+                       HasShadow="True" 
+                       BackgroundColor="White" 
+                       BorderColor="#E8F5E9">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToGuidesCommand}"/>
+                    </Frame.GestureRecognizers>
+
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="12">
+                        <Image Source="icon_guide.png" HeightRequest="45" WidthRequest="45" Aspect="AspectFit"/>
+                        <Label Text="Recycling Guides" 
+                               TextColor="#333333" 
+                               FontSize="13" 
+                               FontAttributes="Bold" 
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="1" 
+                       CornerRadius="20" 
+                       HasShadow="True" 
+                       BackgroundColor="White" 
+                       BorderColor="#E8F5E9">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToNearMeCommand}"/>
+                    </Frame.GestureRecognizers>
+
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="12">
+                        <Image Source="icon_map_marker.png" HeightRequest="45" WidthRequest="45" Aspect="AspectFit"/>
+                        <Label Text="Near Me" 
+                               TextColor="#333333" 
+                               FontSize="13" 
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+
+            <Frame CornerRadius="20" 
+                   BackgroundColor="White" 
+                   HasShadow="True" 
+                   Padding="20" 
+                   BorderColor="#E8F5E9">
+                <Grid ColumnDefinitions="*, Auto">
+                    <VerticalStackLayout Grid.Column="0" Spacing="5" VerticalOptions="Center">
+                        <Label Text="Frequent Questions (FAQ)" FontAttributes="Bold" FontSize="15" TextColor="#333333"/>
+                        <Label Text="Learn what items can be recycled" FontSize="11" TextColor="Gray"/>
+                    </VerticalStackLayout>
+
+                    <Button Grid.Column="1" 
+                            Text=">" 
+                            FontSize="18" 
+                            FontAttributes="Bold"
+                            HeightRequest="45" 
+                            WidthRequest="45" 
+                            CornerRadius="22" 
+                            BackgroundColor="#00C569" 
+                            TextColor="White"
+                            Padding="0"
+                            VerticalOptions="Center"
+                            Command="{Binding NavigateToFaqCommand}"/>
+                </Grid>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.LoginPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4F9F6">
+
+    <Grid>
+        <Frame VerticalOptions="Start" HeightRequest="280" CornerRadius="0" HasShadow="False" BorderColor="Transparent" Margin="0,-50,0,0">
+            <Frame.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#00C569" Offset="0.1"/>
+                    <GradientStop Color="#008F4C" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Frame.Background>
+        </Frame>
+
+        <ScrollView>
+            <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+
+                <Image Source="app_logo.png" 
+                       HeightRequest="180" 
+                       WidthRequest="180" 
+                       Aspect="AspectFit" 
+                       HorizontalOptions="Center"
+                       Margin="0,30,0,10"/>
+
+                <Label Text="Welcome Back" FontSize="28" FontAttributes="Bold" TextColor="#2D3E50" HorizontalOptions="Center"/>
+                <Label Text="Let's make the world cleaner" FontSize="15" TextColor="Gray" HorizontalOptions="Center" Margin="0,-10,0,15"/>
+
+                <Grid ColumnDefinitions="*,*" Margin="0,10">
+                    <VerticalStackLayout Grid.Column="0" Spacing="8">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SwitchToLoginCommand}" />
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Label Text="Login" FontSize="18" FontAttributes="Bold" TextColor="{Binding LoginTabColor}" HorizontalOptions="Center"/>
+                        <BoxView HeightRequest="4" WidthRequest="40" Color="#00C569" CornerRadius="2" IsVisible="{Binding LoginIndicatorVisible}" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="8">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SwitchToSignUpCommand}" />
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Label Text="Sign up" FontSize="18" FontAttributes="Bold" TextColor="{Binding SignUpTabColor}" HorizontalOptions="Center"/>
+                        <BoxView HeightRequest="4" WidthRequest="40" Color="#00C569" CornerRadius="2" IsVisible="{Binding SignUpIndicatorVisible}" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <VerticalStackLayout Spacing="15">
+
+                    <VerticalStackLayout IsVisible="{Binding IsSignUpMode}">
+                        <Frame BorderColor="Transparent" BackgroundColor="White" CornerRadius="15" HeightRequest="55" HasShadow="True" Padding="15,0">
+                            <Entry Text="{Binding FullName}" Placeholder="Full Name" TextColor="#2D3E50" VerticalOptions="Center"/>
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <Frame BorderColor="Transparent" BackgroundColor="White" CornerRadius="15" HeightRequest="55" HasShadow="True" Padding="15,0">
+                        <Entry Text="{Binding Email}" Placeholder="Email Address" TextColor="#2D3E50" Keyboard="Email" VerticalOptions="Center"/>
+                    </Frame>
+
+                    <Frame BorderColor="Transparent" BackgroundColor="White" CornerRadius="15" HeightRequest="55" HasShadow="True" Padding="15,0">
+                        <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Password" TextColor="#2D3E50" VerticalOptions="Center"/>
+                    </Frame>
+
+                    <Label Text="Forgot password?" 
+                           FontSize="13" 
+                           TextColor="#00C569" 
+                           FontAttributes="Bold" 
+                           HorizontalOptions="End"
+                           IsVisible="{Binding IsLoginMode}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                        </Label.GestureRecognizers>
+
+                    </Label>
+                </VerticalStackLayout>
+
+                <Button Text="{Binding MainButtonText}" 
+                        Command="{Binding MainActionCommand}"
+                        TextColor="White" 
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        CornerRadius="25" 
+                        HeightRequest="55"
+                        Margin="0,25,0,0">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#00C569" Offset="0.0"/>
+                            <GradientStop Color="#009955" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Shadow>
+                        <Shadow Brush="#00C569" Offset="0,5" Radius="10" Opacity="0.4"/>
+                    </Button.Shadow>
+                </Button>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.AdminEditGuidePage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4F9F6">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="20">
+            <Label Text="Edit Guides" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,10"/>
+
+            <Frame BackgroundColor="White" CornerRadius="20" Padding="20">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Title" FontAttributes="Bold"/>
+                    <Entry Text="{Binding Guide.Title}" BackgroundColor="#F9F9F9"/>
+
+                    <Label Text="Category" FontAttributes="Bold"/>
+                    <Picker Title="Select Category" SelectedIndex="0">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Paper</x:String>
+                                <x:String>Plastic</x:String>
+                                <x:String>Glass</x:String>
+                                <x:String>Metal</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <Label Text="Article URL :" FontAttributes="Bold"/>
+                    <Entry Text="{Binding Guide.JournalUrl}" BackgroundColor="#F9F9F9"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="0,20,0,0">
+                <Button Grid.Column="0" Text="Save Changes" Command="{Binding SaveChangesCommand}" BackgroundColor="#00C569" TextColor="White" CornerRadius="20"/>
+                <Button Grid.Column="1" Text="Cancel" Command="{Binding CancelCommand}" BackgroundColor="Gray" TextColor="White" CornerRadius="20"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

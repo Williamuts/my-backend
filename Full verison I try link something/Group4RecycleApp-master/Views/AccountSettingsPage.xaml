@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.AccountSettingsPage"
+             Title="Account Settings"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            <Grid ColumnDefinitions="Auto, *">
+                <Button Text="&lt;" BackgroundColor="Transparent" TextColor="Black" FontSize="24" Command="{Binding GoBackCommand}" Padding="0" HorizontalOptions="Start"/>
+                <Label Grid.Column="1" Text="Account Settings" FontSize="20" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" Margin="-40,0,0,0" HorizontalOptions="Center"/>
+            </Grid>
+
+            <Frame HeightRequest="100" WidthRequest="100" CornerRadius="50" HorizontalOptions="Center" Padding="0" IsClippedToBounds="True">
+                <Image Source="dotnet_bot.png" Aspect="AspectFill" BackgroundColor="LightGray"/>
+            </Frame>
+            <Label Text="Change Photo" TextColor="#00C569" HorizontalOptions="Center" FontAttributes="Bold"/>
+
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Full Name" FontAttributes="Bold" TextColor="Black"/>
+                <Entry Text="{Binding FullName}" BackgroundColor="White" TextColor="Black"/>
+
+                <Label Text="Email" FontAttributes="Bold" TextColor="Black"/>
+                <Entry Text="{Binding Email}" BackgroundColor="White" TextColor="Gray" IsReadOnly="True"/>
+
+                <Label Text="Phone Number" FontAttributes="Bold" TextColor="Black"/>
+                <Entry Text="{Binding PhoneNumber}" BackgroundColor="White" TextColor="Black" Keyboard="Telephone"/>
+
+                <Label Text="Address" FontAttributes="Bold" TextColor="Black"/>
+                <Entry Text="{Binding Address}" BackgroundColor="White" TextColor="Black"/>
+            </VerticalStackLayout>
+
+            <Button Text="Save Changes" Command="{Binding SaveChangesCommand}" BackgroundColor="#00C569" TextColor="White" CornerRadius="25" HeightRequest="50" FontAttributes="Bold" Margin="0,20,0,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

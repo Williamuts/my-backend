@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Group4RecycleApp.Views.TermsPage"
+             Title="Terms &amp; Privacy"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4F9F6">
+
+    <Grid RowDefinitions="Auto, *">
+        
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Padding="25,25,25,10" BackgroundColor="White">
+            <Button Text="&lt;" 
+                    BackgroundColor="#F4F9F6" 
+                    TextColor="Black" 
+                    HeightRequest="40" 
+                    WidthRequest="40" 
+                    CornerRadius="12" 
+                    FontAttributes="Bold" 
+                    Clicked="OnBackClicked" 
+                    Padding="0"/>
+            
+            <Label Grid.Column="1" 
+                   Text="Legal Information" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   TextColor="#2D3E50" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center" 
+                   Margin="-40,0,0,0"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="25" Spacing="20">
+
+                <Frame CornerRadius="20" HasShadow="False" BackgroundColor="White" BorderColor="Transparent" Padding="20">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Privacy Policy" FontSize="20" FontAttributes="Bold" TextColor="#00C569"/>
+                        <Label Text="Last Updated: November 2025" FontSize="12" TextColor="Gray"/>
+                        
+                        <Label Text="1. Information We Collect" FontAttributes="Bold" TextColor="#2D3E50" Margin="0,10,0,0"/>
+                        <Label Text="• Location Data: We collect your precise location to show nearby recycling centers. This data is only used when the app is in use." TextColor="Gray" FontSize="13"/>
+                        <Label Text="• Personal Info: Name, email, and phone number provided during registration." TextColor="Gray" FontSize="13"/>
+                        <Label Text="• Media: Photos uploaded via camera/gallery for waste reporting." TextColor="Gray" FontSize="13"/>
+
+                        <Label Text="2. How We Use Your Data" FontAttributes="Bold" TextColor="#2D3E50" Margin="0,10,0,0"/>
+                        <Label Text="• To provide accurate navigation to recycling facilities." TextColor="Gray" FontSize="13"/>
+                        <Label Text="• To track your personal recycling history and impact score." TextColor="Gray" FontSize="13"/>
+                        <Label Text="• To improve our recycling guides and database." TextColor="Gray" FontSize="13"/>
+
+                        <Label Text="3. Data Security" FontAttributes="Bold" TextColor="#2D3E50" Margin="0,10,0,0"/>
+                        <Label Text="We implement industry-standard security measures to protect your data. We do not sell your personal data to third parties." TextColor="Gray" FontSize="13"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame CornerRadius="20" HasShadow="False" BackgroundColor="White" BorderColor="Transparent" Padding="20">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Terms of Service" FontSize="20" FontAttributes="Bold" TextColor="#00C569"/>
+                        
+                        <Label Text="1. Acceptance of Terms" FontAttributes="Bold" TextColor="#2D3E50" Margin="0,10,0,0"/>
+                        <Label Text="By downloading or using the app, these terms will automatically apply to you. You should make sure therefore that you read them carefully before using the app." TextColor="Gray" FontSize="13"/>
+
+                        <Label Text="2. User Conduct" FontAttributes="Bold" TextColor="#2D3E50" Margin="0,10,0,0"/>
+                        <Label Text="You agree not to upload false information regarding recycling deposits. Misuse of the reporting feature may result in account suspension." TextColor="Gray" FontSize="13"/>
+
+                        <Label Text="3. Accuracy of Information" FontAttributes="Bold" TextColor="#2D3E50" Margin="0,10,0,0"/>
+                        <Label Text="While we strive to keep recycling center hours and accepted items up to date, we cannot guarantee 100% accuracy as facility rules change frequently." TextColor="Gray" FontSize="13"/>
+
+                        <Label Text="4. Termination" FontAttributes="Bold" TextColor="#2D3E50" Margin="0,10,0,0"/>
+                        <Label Text="We reserve the right to terminate accounts that violate our community guidelines or local recycling laws." TextColor="Gray" FontSize="13"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Label Text="Questions? Contact us at support@recycleapp.com" 
+                       TextColor="Gray" 
+                       FontSize="12" 
+                       HorizontalOptions="Center" 
+                       Margin="0,10,0,30"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.LocationDetailPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto, *, Auto">
+
+        <!-- Top Image / Header -->
+        <Grid Grid.Row="0" HeightRequest="250">
+            <!-- Placeholder Header Image -->
+            <BoxView Color="#D1F2EB" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+            <Button Text="&lt;" 
+                    Command="{Binding GoBackCommand}" 
+                    BackgroundColor="White" 
+                    TextColor="Black" 
+                    CornerRadius="20" 
+                    HeightRequest="40" 
+                    WidthRequest="40" 
+                    VerticalOptions="Start" 
+                    HorizontalOptions="Start" 
+                    Margin="20,40,0,0"/>
+        </Grid>
+
+        <!-- Content Body -->
+        <ScrollView Grid.Row="1" Margin="0,-30,0,0">
+            <!-- Negative margin to overlap header -->
+            <Frame CornerRadius="30" HasShadow="False" BackgroundColor="White" Padding="25">
+                <VerticalStackLayout Spacing="15">
+
+                    <!-- Title -->
+                    <Label Text="{Binding Center.Name}" FontSize="24" FontAttributes="Bold" TextColor="Black"/>
+
+                    <!-- Rating -->
+                    <HorizontalStackLayout Spacing="5">
+                        <Label Text="⭐⭐⭐⭐⭐" TextColor="#FFD700"/>
+                        <Label Text="{Binding Center.Rating}" TextColor="Gray"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Hours -->
+                    <Label Text="{Binding Center.OpeningHours, StringFormat='Opened {0}'}" TextColor="Gray" FontSize="12"/>
+
+                    <BoxView HeightRequest="1" Color="LightGray" Margin="0,10"/>
+
+                    <!-- Overview -->
+                    <Label Text="Overview" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="{Binding Center.Description}" TextColor="Gray" LineHeight="1.2"/>
+
+                    <!-- Mini Map Placeholder (Image) -->
+                    <Frame HeightRequest="150" CornerRadius="15" Padding="0" IsClippedToBounds="True" Margin="0,20,0,0">
+                        <Grid>
+                            <Image Source="placeholder_map.png" Aspect="AspectFill" BackgroundColor="LightGray"/>
+                            <Label Text="Map Preview" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Gray"/>
+                        </Grid>
+                    </Frame>
+                    <Label Text="{Binding Center.Address}" HorizontalOptions="End" FontSize="10" TextColor="Gray"/>
+
+                </VerticalStackLayout>
+            </Frame>
+        </ScrollView>
+
+        <!-- Bottom Action Bar -->
+        <Grid Grid.Row="2" ColumnDefinitions="Auto, *" Padding="20" ColumnSpacing="15" BackgroundColor="White">
+            <!-- Call Button -->
+            <Button Grid.Column="0" 
+                    ImageSource="icon_phone.png" 
+                    Command="{Binding CallCenterCommand}"
+                    BackgroundColor="White" 
+                    BorderColor="#00C569" 
+                    BorderWidth="2" 
+                    HeightRequest="50" 
+                    WidthRequest="50" 
+                    CornerRadius="25"/>
+
+            <!-- Get Info / Book Button -->
+            <Button Grid.Column="1" 
+                    Text="Get info" 
+                    Command="{Binding GetInfoCommand}"
+                    BackgroundColor="#00C569" 
+                    TextColor="White" 
+                    FontAttributes="Bold" 
+                    CornerRadius="25" 
+                    HeightRequest="50"/>
+        </Grid>
+    </Grid>
+</ContentPage>

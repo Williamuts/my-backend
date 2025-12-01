@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.AdminDashboardPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4F9F6">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="25">
+
+            <Label Text="Admin Dashboard" FontSize="26" FontAttributes="Bold" TextColor="#2D3E50" HorizontalOptions="Center" Margin="0,20,0,10"/>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+
+                <Frame Grid.Column="0" CornerRadius="20" HasShadow="True" Padding="15" BackgroundColor="White" BorderColor="Transparent">
+                    <StackLayout>
+                        <Label Text="Total Users" FontSize="12" TextColor="Gray" HorizontalOptions="Center"/>
+                        <Label Text="{Binding TotalUsers}" FontSize="28" FontAttributes="Bold" TextColor="#2D3E50" HorizontalOptions="Center"/>
+                        <Image Source="icon_profile.png" HeightRequest="20" HorizontalOptions="End" Opacity="0.5">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="#00C569" />
+                            </Image.Behaviors>
+                        </Image>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Column="1" CornerRadius="20" HasShadow="True" Padding="15" BackgroundColor="White" BorderColor="Transparent">
+                    <StackLayout>
+                        <Label Text="Pending" FontSize="12" TextColor="Gray" HorizontalOptions="Center"/>
+                        <Label Text="{Binding PendingApprovals}" FontSize="28" FontAttributes="Bold" TextColor="#00C569" HorizontalOptions="Center"/>
+                        <Image Source="icon_history.png" HeightRequest="20" HorizontalOptions="End" Opacity="0.5">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="#00C569" />
+                            </Image.Behaviors>
+                        </Image>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+            <Label Text="Quick Actions" FontSize="18" FontAttributes="Bold" TextColor="#2D3E50" Margin="0,10,0,0"/>
+
+            <Grid RowDefinitions="110, 110" ColumnDefinitions="*, *" ColumnSpacing="15" RowSpacing="15">
+
+                <Frame Grid.Row="0" Grid.Column="0" CornerRadius="20" HasShadow="True" BackgroundColor="#00C569" BorderColor="Transparent" Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToAddCenterCommand}"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="8">
+                        <Image Source="icon_admin_add.png" HeightRequest="35" WidthRequest="35" Aspect="AspectFit"/>
+                        <Label Text="Add Center" TextColor="White" FontAttributes="Bold" FontSize="14"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Grid.Row="0" Grid.Column="1" CornerRadius="20" HasShadow="True" BackgroundColor="#00C569" BorderColor="Transparent" Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToReviewCommand}"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="8">
+                        <Image Source="icon_admin_review.png" HeightRequest="35" WidthRequest="35" Aspect="AspectFit"/>
+                        <Label Text="Review" TextColor="White" FontAttributes="Bold" FontSize="14"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="20" HasShadow="True" BackgroundColor="White" BorderColor="Transparent" Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToManageGuidesCommand}"/>
+                    </Frame.GestureRecognizers>
+                    <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15">
+                        <Image Source="icon_admin_guides.png" HeightRequest="40" WidthRequest="40" Aspect="AspectFit"/>
+                        <Label Text="Manage Recycling Guides" TextColor="#2D3E50" FontAttributes="Bold" FontSize="16" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                </Frame>
+            </Grid>
+
+            <Button Text="Logout" 
+                    Command="{Binding LogoutCommand}" 
+                    BackgroundColor="White" 
+                    TextColor="#D32F2F" 
+                    BorderColor="#D32F2F" 
+                    BorderWidth="1" 
+                    CornerRadius="25" 
+                    HeightRequest="50"
+                    FontAttributes="Bold"
+                    Margin="0,20,0,20"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

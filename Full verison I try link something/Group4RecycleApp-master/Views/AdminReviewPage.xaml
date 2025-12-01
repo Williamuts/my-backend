@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.AdminReviewPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4F9F6">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <Grid ColumnDefinitions="Auto, *">
+            <Button Text="&lt;" BackgroundColor="Transparent" TextColor="Black" FontSize="24" Command="{Binding GoBackCommand}"/>
+            <Label Grid.Column="1" Text="Pending Request" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" Margin="-40,0,0,0"/>
+        </Grid>
+
+        <Frame BackgroundColor="White" CornerRadius="20" Padding="15">
+            <VerticalStackLayout>
+                <Label Text="Needs Approval" FontAttributes="Bold" TextColor="Gray" Margin="0,0,0,10"/>
+
+                <CollectionView ItemsSource="{Binding Requests}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*, Auto, Auto" Padding="0,10">
+                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                    <Label Text="{Binding UserName}" FontAttributes="Bold" TextColor="Black"/>
+                                    <Image Source="{Binding Icon}" HeightRequest="20"/>
+                                </HorizontalStackLayout>
+
+                                <!-- Approve -->
+                                <ImageButton Grid.Column="1" Source="icon_check.png" HeightRequest="30" WidthRequest="30" Margin="0,0,10,0"
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AdminReviewViewModel}}, Path=ApproveCommand}"
+                                             CommandParameter="{Binding .}"/>
+
+                                <!-- Reject -->
+                                <ImageButton Grid.Column="2" Source="icon_cross.png" HeightRequest="30" WidthRequest="30"
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AdminReviewViewModel}}, Path=RejectCommand}"
+                                             CommandParameter="{Binding .}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Frame>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.RecycleCategoriesPage"
+             Title="Recycle Wastes"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4F9F6">
+
+    <Grid RowDefinitions="Auto, *, Auto" Padding="25">
+
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Margin="0,0,0,20">
+
+            <Button Text="&lt;" 
+            BackgroundColor="White" 
+            TextColor="Black" 
+            HeightRequest="40" 
+            WidthRequest="40" 
+            CornerRadius="12" 
+            FontAttributes="Bold" 
+            Command="{Binding GoBackCommand}" 
+            Padding="0">
+
+                <Button.Shadow>
+                    <Shadow Brush="Gray" Offset="0,2" Radius="5" Opacity="0.1"/>
+                </Button.Shadow>
+            </Button>
+
+            <Label Grid.Column="1" Text="Recycle Wastes" FontSize="20" FontAttributes="Bold" TextColor="#2D3E50" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Grid>
+
+        <VerticalStackLayout Grid.Row="1" Spacing="25">
+            <Label Text="What do you want to recycle?" FontSize="22" FontAttributes="Bold" TextColor="#2D3E50"/>
+            <Label Text="Select a category to continue" FontSize="14" TextColor="Gray" Margin="0,-20,0,0"/>
+
+            <CollectionView ItemsSource="{Binding Categories}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="3" HorizontalItemSpacing="15" VerticalItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="20" HasShadow="True" Padding="10" HeightRequest="110"
+                               BackgroundColor="{Binding Color}" 
+                               BorderColor="{Binding BorderColor}">
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RecycleCategoriesViewModel}}, Path=SelectCategoryCommand}" CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="8">
+                                <Image Source="{Binding Icon}" HeightRequest="45" WidthRequest="45" Aspect="AspectFit"/>
+                                <Label Text="{Binding Name}" TextColor="#2D3E50" FontSize="12" FontAttributes="Bold"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="How to recycle correctly?" 
+                   TextColor="#00C569" 
+                   HorizontalOptions="Center" 
+                   FontAttributes="Bold" 
+                   TextDecorations="Underline">
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToGuidesCommand}"/>
+                </Label.GestureRecognizers>
+
+            </Label>
+        </VerticalStackLayout>
+
+        <Button Grid.Row="2" Text="CONTINUE" Command="{Binding NextCommand}" 
+                TextColor="White" CornerRadius="25" HeightRequest="55" FontAttributes="Bold" Margin="0,10">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#00C569" Offset="0.0"/>
+                    <GradientStop Color="#008F4C" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Shadow>
+                <Shadow Brush="#00C569" Offset="0,5" Radius="10" Opacity="0.4"/>
+            </Button.Shadow>
+        </Button>
+    </Grid>
+</ContentPage>

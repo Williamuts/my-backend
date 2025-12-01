@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.LocationPage"
+             Title="Location"
+             Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <!-- 1. The Map -->
+        <!-- Note: We bind ItemsSource in Code Behind usually for Maps, but here is the structure -->
+        <maps:Map x:Name="RecycleMap" IsShowingUser="True" MapType="Street"/>
+
+        <!-- 2. Search Bar Overlay -->
+        <Frame VerticalOptions="Start" Margin="20,50,20,0" CornerRadius="25" Padding="10,0" HeightRequest="50" HasShadow="True" BackgroundColor="White">
+            <SearchBar Placeholder="Search location..." BackgroundColor="Transparent"/>
+        </Frame>
+
+        <!-- 3. Bottom Preview Card (Hidden by default) -->
+        <Frame VerticalOptions="End" Margin="20,0,20,30" CornerRadius="20" Padding="15" HasShadow="True" BackgroundColor="White"
+               IsVisible="{Binding IsPreviewVisible}">
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+
+                <!-- Title -->
+                <Label Grid.Row="0" Grid.Column="0" Text="{Binding SelectedCenter.Name}" FontAttributes="Bold" FontSize="16" TextColor="Black"/>
+
+                <!-- Address -->
+                <Label Grid.Row="1" Grid.Column="0" Text="{Binding SelectedCenter.Address}" FontSize="12" TextColor="Gray"/>
+
+                <!-- Details Button -->
+                <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" 
+                        Text="Details" 
+                        Command="{Binding ViewFullDetailsCommand}"
+                        BackgroundColor="#00C569" 
+                        TextColor="White" 
+                        CornerRadius="10" 
+                        HeightRequest="40"
+                        FontSize="12"/>
+            </Grid>
+        </Frame>
+    </Grid>
+</ContentPage>

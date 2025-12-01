@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.OnboardingPage"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*, Auto" Padding="20,0,20,20" BackgroundColor="White">
+        <CarouselView Grid.Row="0" ItemsSource="{Binding Items}" Position="{Binding Position}" IndicatorView="indicatorView">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="20">
+                        <Image Source="{Binding Image}" HeightRequest="250" Aspect="AspectFit" />
+                        <Label Text="{Binding Title}" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black" />
+                        <Label Text="{Binding Description}" FontSize="16" HorizontalOptions="Center" HorizontalTextAlignment="Center" TextColor="Gray" />
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <IndicatorView x:Name="indicatorView" Grid.Row="0" IndicatorColor="LightGray" SelectedIndicatorColor="#00C569" HorizontalOptions="Center" VerticalOptions="End" Margin="0,0,0,20" />
+
+        <Button Grid.Row="1" Text="Next" Command="{Binding NextCommand}" BackgroundColor="#00C569" TextColor="White" CornerRadius="25" HeightRequest="50" FontAttributes="Bold" WidthRequest="200" HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Group4RecycleApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Group4RecycleApp.Views"
+    Title="Group4RecycleApp">
+
+    <!-- 1. 登录页 -->
+    <ShellContent Route="LoginPage" 
+                  ContentTemplate="{DataTemplate views:LoginPage}" 
+                  FlyoutItemIsVisible="False" 
+                  Shell.TabBarIsVisible="False" />
+
+    <!-- 2. 普通用户的 TabBar -->
+    <TabBar Route="MainTabs">
+        <Tab Title="Home" Icon="icon_home.png">
+            <ShellContent Route="DashboardPage" ContentTemplate="{DataTemplate views:DashboardPage}" />
+        </Tab>
+        <Tab Title="Location" Icon="icon_location.png">
+            <ShellContent Route="LocationPage" ContentTemplate="{DataTemplate views:LocationPage}" />
+        </Tab>
+        <Tab Title="History" Icon="icon_history.png">
+            <ShellContent Route="HistoryPage" ContentTemplate="{DataTemplate views:HistoryPage}" />
+        </Tab>
+        <Tab Title="Profile" Icon="icon_profile.png">
+            <ShellContent Route="ProfilePage" ContentTemplate="{DataTemplate views:ProfilePage}" />
+        </Tab>
+    </TabBar>
+
+    <!-- 3. 管理员页面 (Admin Dashboard) -->
+    <!-- 👇👇👇 [关键修改] 👇👇👇 -->
+    <!-- 把 Route="AdminDashboardRoute" 改成了 Route="AdminDashboardPage" -->
+    <!-- 这样 LoginViewModel 里的 //AdminDashboardPage 才能找到它 -->
+    <ShellContent Route="AdminDashboardPage" 
+                  ContentTemplate="{DataTemplate views:AdminDashboardPage}" 
+                  FlyoutItemIsVisible="False" 
+                  Shell.TabBarIsVisible="False" />
+
+</Shell>

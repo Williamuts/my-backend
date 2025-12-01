@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.GuideDetailPage"
+             Title="Guide Detail"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4F9F6">
+
+    <Grid RowDefinitions="Auto, *">
+
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Padding="25,25,25,10">
+            <Button Text="&lt;" 
+                    BackgroundColor="White" 
+                    TextColor="Black" 
+                    HeightRequest="40" 
+                    WidthRequest="40" 
+                    CornerRadius="12" 
+                    FontAttributes="Bold" 
+                    Command="{Binding GoBackCommand}" 
+                    Padding="0">
+
+                <Button.Shadow>
+                    <Shadow Brush="Gray" Offset="0,2" Radius="5" Opacity="0.1"/>
+                </Button.Shadow>
+            </Button>
+
+            <Label Grid.Column="1" 
+                   Text="{Binding Guide.Title}" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   TextColor="#2D3E50" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center" 
+                   Margin="-40,0,0,0"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="25" Padding="25">
+
+                <Frame CornerRadius="25" HasShadow="True" BackgroundColor="White" BorderColor="Transparent" Padding="0">
+                    <VerticalStackLayout>
+                        <Label Text="Video Tutorial" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#2D3E50" 
+                               Margin="20,15,0,10"/>
+
+                        <Frame Padding="0" Margin="15,0,15,15" CornerRadius="15" HeightRequest="220" IsClippedToBounds="True" HasShadow="False" BorderColor="Transparent" BackgroundColor="Black">
+                            <toolkit:MediaElement Source="{Binding Guide.VideoSource}"
+                                                  ShouldShowPlaybackControls="True"
+                                                  ShouldAutoPlay="True"
+                                                  Aspect="AspectFit"
+                                                  HeightRequest="220"/>
+                        </Frame>
+
+                        <Label Text="{Binding Guide.CreditName}" 
+                               FontSize="11" 
+                               TextColor="Gray" 
+                               HorizontalOptions="End" 
+                               Margin="0,-10,20,15"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame CornerRadius="25" HasShadow="True" BackgroundColor="White" BorderColor="Transparent" Padding="25">
+                    <VerticalStackLayout Spacing="15">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label Text="Full Article" FontSize="18" FontAttributes="Bold" TextColor="#2D3E50"/>
+                            <Image Source="icon_guide.png" Grid.Column="1" HeightRequest="30" WidthRequest="30" Opacity="0.5"/>
+                        </Grid>
+
+                        <Label Text="Want to learn more? Read the official detailed breakdown on the scientific process of recycling this material." 
+                               TextColor="Gray" 
+                               FontSize="13" 
+                               LineHeight="1.2"/>
+
+                        <Button Text="READ JOURNAL" 
+                                Command="{Binding OpenJournalCommand}"
+                                TextColor="White" 
+                                FontAttributes="Bold"
+                                CornerRadius="25" 
+                                HeightRequest="50"
+                                Margin="0,10,0,0">
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#00C569" Offset="0.0"/>
+                                    <GradientStop Color="#008F4C" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                            <Button.Shadow>
+                                <Shadow Brush="#00C569" Offset="0,4" Radius="8" Opacity="0.3"/>
+                            </Button.Shadow>
+                        </Button>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

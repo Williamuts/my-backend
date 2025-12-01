@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.HistoryDetailPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8F8F8">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+
+            <Grid ColumnDefinitions="Auto, *">
+                <Button Text="&lt;" BackgroundColor="Transparent" TextColor="Black" FontSize="20" Padding="0" HorizontalOptions="Start" Command="{Binding GoBackCommand}"/>
+                <Label Grid.Column="1" Text="{Binding Session.Date, StringFormat='Recycling Session - {0:MMM dd, yyyy}'}" 
+                       FontSize="16" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center"/>
+            </Grid>
+
+            <Frame CornerRadius="20" HasShadow="False" BackgroundColor="White" BorderColor="Transparent">
+                <Grid ColumnDefinitions="*, Auto">
+                    <VerticalStackLayout>
+                        <Label Text="Session Summary" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="{Binding Session.TotalItems, StringFormat='{0} Items Recycled'}" TextColor="#00C569" FontAttributes="Bold" FontSize="16" Margin="0,5,0,0"/>
+                    </VerticalStackLayout>
+                    <Image Grid.Column="1" Source="icon_leaf.png" HeightRequest="30" WidthRequest="30" Aspect="AspectFit"/>
+                </Grid>
+            </Frame>
+
+            <Frame CornerRadius="20" HasShadow="False" BackgroundColor="White" BorderColor="Transparent">
+                <VerticalStackLayout Spacing="10">
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Method :" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="{Binding Session.Method}" TextColor="Black"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Time :" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="{Binding Session.Time}" TextColor="Black"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame CornerRadius="20" HasShadow="False" BackgroundColor="White" BorderColor="Transparent">
+                <VerticalStackLayout>
+                    <Label Text="Items Recycled" FontAttributes="Bold" TextColor="Black" Margin="0,0,0,10"/>
+
+                    <CollectionView ItemsSource="{Binding Session.Items}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="Auto, *, Auto" Padding="0,10">
+                                    <Image Grid.Column="0" Source="{Binding Icon}" HeightRequest="30" WidthRequest="30" Margin="0,0,15,0"/>
+                                    <Label Grid.Column="1" Text="{Binding Name}" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center"/>
+                                    <Label Grid.Column="2" Text="{Binding Quantity}" TextColor="Black" VerticalOptions="Center"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame CornerRadius="20" HasShadow="False" BackgroundColor="White" BorderColor="Transparent">
+                <Grid ColumnDefinitions="Auto, *">
+                    <Frame CornerRadius="10" Padding="0" IsClippedToBounds="True" HeightRequest="60" WidthRequest="80">
+                        <Image Source="{Binding Session.PhotoImage}" Aspect="AspectFill"/>
+                    </Frame>
+                    <VerticalStackLayout Grid.Column="1" Margin="15,0,0,0" VerticalOptions="Center">
+                        <Label Text="Items History" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="{Binding Session.Status}" TextColor="#00C569" FontAttributes="Bold" Margin="0,5,0,0"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

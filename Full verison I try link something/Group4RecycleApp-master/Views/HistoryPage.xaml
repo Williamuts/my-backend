@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.HistoryPage"
+             Title="History"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4F9F6">
+
+    <Grid RowDefinitions="Auto, *">
+        <Label Grid.Row="0" Text="Recycling History" FontSize="24" FontAttributes="Bold" TextColor="#2D3E50" Margin="25,25,0,10"/>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="25" Spacing="25">
+
+                <Frame CornerRadius="25" HasShadow="True" Padding="25" BorderColor="Transparent">
+                    <Frame.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#00C569" Offset="0.0"/>
+                            <GradientStop Color="#009955" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Frame.Background>
+
+                    <Grid ColumnDefinitions="*, Auto">
+                        <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                            <Label Text="Your Lifetime Impact" TextColor="White" FontSize="14" Opacity="0.9"/>
+                            <HorizontalStackLayout Spacing="5">
+                                <Label Text="{Binding TotalItemsRecycled}" FontSize="36" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="items" FontSize="16" TextColor="White" VerticalOptions="Center" Margin="0,8,0,0"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+
+                        <Frame Grid.Column="1" HeightRequest="70" WidthRequest="70" CornerRadius="35" 
+                               BackgroundColor="White" Padding="0" HasShadow="False">
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="2">
+                                <Image Source="icon_tree.png" HeightRequest="25" WidthRequest="25" Aspect="AspectFit"/>
+                                <Label Text="{Binding TreesSaved}" FontSize="14" TextColor="#00C569" FontAttributes="Bold"/>
+                                <Label Text="Trees" FontSize="8" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </Grid>
+                </Frame>
+
+                <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                    <HorizontalStackLayout Spacing="12">
+                        <Button Text="Recent" BackgroundColor="#00C569" TextColor="White" CornerRadius="18" HeightRequest="36" Padding="20,0" FontSize="12"/>
+                        <Button Text="Last month" BackgroundColor="White" TextColor="Gray" BorderColor="#E8F5E9" BorderWidth="1" CornerRadius="18" HeightRequest="36" Padding="20,0" FontSize="12"/>
+                        <Button Text="Last 3 months" BackgroundColor="White" TextColor="Gray" BorderColor="#E8F5E9" BorderWidth="1" CornerRadius="18" HeightRequest="36" Padding="20,0" FontSize="12"/>
+                    </HorizontalStackLayout>
+                </ScrollView>
+
+                <CollectionView ItemsSource="{Binding HistoryList}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Margin="0,0,0,15" CornerRadius="20" HasShadow="True" BackgroundColor="White" BorderColor="Transparent" Padding="20">
+                                <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*, Auto">
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Date, StringFormat='{0:MMM dd, yyyy}'}" FontAttributes="Bold" TextColor="#2D3E50" FontSize="16"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding Title}" TextColor="Gray" FontSize="13" Margin="0,2,0,0"/>
+
+                                    <Frame Grid.Row="2" Grid.Column="0" BackgroundColor="#E8F5E9" Padding="10,4" HorizontalOptions="Start" CornerRadius="8" Margin="0,10,0,0" BorderColor="Transparent">
+                                        <Label Text="{Binding Status}" TextColor="{Binding StatusColor}" FontAttributes="Bold" FontSize="11"/>
+                                    </Frame>
+
+                                    <Button Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" 
+                                            Text="View" 
+                                            FontSize="12" 
+                                            BackgroundColor="#F4F9F6" 
+                                            TextColor="#00C569" 
+                                            FontAttributes="Bold"
+                                            CornerRadius="15" 
+                                            HeightRequest="35" 
+                                            WidthRequest="80"
+                                            VerticalOptions="Center"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HistoryViewModel}}, Path=ViewDetailsCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

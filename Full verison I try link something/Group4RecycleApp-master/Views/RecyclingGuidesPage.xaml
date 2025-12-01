@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.RecyclingGuidesPage"
+             Title="Recycling Guides"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4F9F6">
+
+    <VerticalStackLayout Padding="25" Spacing="25">
+
+        <Grid ColumnDefinitions="Auto, *">
+            <Button Text="&lt;" 
+        BackgroundColor="White" 
+        TextColor="Black" 
+        HeightRequest="40" 
+        WidthRequest="40" 
+        CornerRadius="12" 
+        FontAttributes="Bold" 
+        Command="{Binding GoBackCommand}" 
+        Padding="0">
+                <Button.Shadow>
+                    <Shadow Brush="Gray" Offset="0,2" Radius="5" Opacity="0.1"/>
+                </Button.Shadow>
+            </Button>
+            <Label Grid.Column="1" Text="Recycling Guides" FontSize="20" FontAttributes="Bold" TextColor="#2D3E50" VerticalOptions="Center" HorizontalOptions="Center" Margin="-40,0,0,0"/>
+        </Grid>
+
+        <CollectionView ItemsSource="{Binding Guides}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="0,0,0,18" CornerRadius="25" HasShadow="True" Padding="15" BackgroundColor="White" BorderColor="Transparent">
+                        <Grid ColumnDefinitions="Auto, *, Auto">
+
+                            <Frame Grid.Column="0" HeightRequest="65" WidthRequest="65" CornerRadius="20" BackgroundColor="{Binding Color}" Padding="12" HasShadow="False" BorderColor="Transparent">
+                                <Image Source="{Binding Icon}" Aspect="AspectFit"/>
+                            </Frame>
+
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Margin="15,0,0,0" Spacing="2">
+                                <Label Text="{Binding Title}" TextColor="#2D3E50" FontAttributes="Bold" FontSize="16"/>
+                                <Label Text="Watch video tutorial" TextColor="Gray" FontSize="11"/>
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="2" Text=">" BackgroundColor="#00C569" TextColor="White" 
+                                    HeightRequest="40" WidthRequest="40" CornerRadius="20" FontAttributes="Bold"
+                                    Padding="0"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RecyclingGuidesViewModel}}, Path=OpenGuideCommand}"
+                                    CommandParameter="{Binding .}"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>

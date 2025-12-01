@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.FaqPage"
+             Title="FAQ"
+             BackgroundColor="#F4F9F6">
+
+    <Grid RowDefinitions="Auto, *">
+        <Label Grid.Row="0" Text="Frequently Ask Questions" FontSize="24" FontAttributes="Bold" TextColor="#2D3E50" Margin="25,25,0,15"/>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Questions}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="25,0,25,15" Padding="0" CornerRadius="20" HasShadow="True" BackgroundColor="White" BorderColor="Transparent">
+                        <VerticalStackLayout>
+
+                            <Grid ColumnDefinitions="*, Auto" Padding="20">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FaqViewModel}}, Path=ToggleAnswerCommand}"
+                                                          CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>
+
+                                <Label Grid.Column="0" Text="{Binding Question}" 
+                                       FontSize="15" FontAttributes="Bold" TextColor="#2D3E50" VerticalOptions="Center"/>
+
+                                <Frame Grid.Column="1" HeightRequest="30" WidthRequest="30" CornerRadius="15" BackgroundColor="#E8F5E9" Padding="0" HasShadow="False">
+                                    <Label Text="v" 
+                                           TextColor="#00C569" 
+                                           FontAttributes="Bold" 
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center" 
+                                           Rotation="{Binding Rotation}"/>
+                                </Frame>
+                            </Grid>
+
+                            <VerticalStackLayout IsVisible="{Binding IsExpanded}" Padding="20,0,20,20">
+                                <BoxView HeightRequest="1" Color="#F0F0F0" Margin="0,0,0,10"/>
+                                <Label Text="{Binding Answer}" 
+                                       TextColor="Gray" 
+                                       FontSize="13" 
+                                       LineHeight="1.2"/>
+                            </VerticalStackLayout>
+
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

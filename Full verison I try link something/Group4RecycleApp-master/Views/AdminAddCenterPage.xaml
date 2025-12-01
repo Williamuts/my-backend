@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.AdminAddCenterPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F4F9F6">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="15">
+            <Label Text="Add New Center" FontSize="22" FontAttributes="Bold" TextColor="#2D3E50" HorizontalOptions="Center" Margin="0,0,0,20"/>
+
+            <Frame BackgroundColor="White" CornerRadius="20" Padding="20" HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Center Name :" FontAttributes="Bold"/>
+                    <Entry Text="{Binding CenterName}" BackgroundColor="#F9F9F9"/>
+
+                    <Label Text="Address :" FontAttributes="Bold"/>
+                    <Entry Text="{Binding Address}" BackgroundColor="#F9F9F9"/>
+
+                    <Label Text="Phone Number :" FontAttributes="Bold"/>
+                    <Entry Text="{Binding PhoneNumber}" BackgroundColor="#F9F9F9" Keyboard="Telephone"/>
+
+                    <Label Text="Opening Hours :" FontAttributes="Bold"/>
+                    <Entry Text="{Binding OpeningHours}" BackgroundColor="#F9F9F9"/>
+
+                    <Label Text="Description :" FontAttributes="Bold"/>
+                    <Editor Text="{Binding Description}" BackgroundColor="#F9F9F9" HeightRequest="80"/>
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="0,20,0,0">
+                <Button Grid.Column="0" Text="Save Center" Command="{Binding SaveCenterCommand}" BackgroundColor="#00C569" TextColor="White" CornerRadius="20"/>
+                <Button Grid.Column="1" Text="Cancel" Command="{Binding CancelCommand}" BackgroundColor="Gray" TextColor="White" CornerRadius="20"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Group4RecycleApp.ViewModels"
+             x:Class="Group4RecycleApp.Views.RecycleSubmissionPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+            <Grid ColumnDefinitions="Auto, *" Margin="0,0,0,10">
+                <Button Text="&lt; Back" BackgroundColor="Transparent" TextColor="Gray" Command="{Binding GoBackCommand}" Padding="0" HorizontalOptions="Start"/>
+            </Grid>
+            <Label Text="Select a center" FontSize="22" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" Margin="0,0,0,20"/>
+
+            <Frame BackgroundColor="#F0F0F0" CornerRadius="20" HasShadow="False" BorderColor="Transparent" Padding="20">
+                <VerticalStackLayout Spacing="15">
+
+                    <Frame BorderColor="Transparent" CornerRadius="10" Padding="10,0" HeightRequest="50" BackgroundColor="White">
+                        <Entry Placeholder="Location Name" Text="{Binding LocationName}" TextColor="Black"/>
+                    </Frame>
+
+                    <Frame BorderColor="Transparent" CornerRadius="10" Padding="10,0" HeightRequest="50" BackgroundColor="White">
+                        <Entry Placeholder="Address" Text="{Binding Address}" TextColor="Black"/>
+                    </Frame>
+
+                    <Button Text="Use my current location" Command="{Binding GetCurrentLocationCommand}" BackgroundColor="#00C569" TextColor="White" FontAttributes="Bold" CornerRadius="10"/>
+
+                    <Frame BorderColor="#00C569" BackgroundColor="White" CornerRadius="15" HeightRequest="150" HasShadow="False">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TakePhotoCommand}"/>
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
+                                <Image Source="icon_camera.png" HeightRequest="40" WidthRequest="40"/>
+                                <Label Text="Tap to add photo (Camera)" TextColor="Gray" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                            <Image Source="{Binding PhotoPreview}" Aspect="AspectFill" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame BorderColor="Transparent" CornerRadius="10" Padding="10,0" HeightRequest="50" BackgroundColor="White">
+                        <Entry Placeholder="Description" Text="{Binding Description}" TextColor="Black"/>
+                    </Frame>
+
+                    <Label Text="{Binding Category.Name, StringFormat='Selected: {0}'}" TextColor="Gray" FontSize="12" HorizontalOptions="Center"/>
+
+                    <Button Text="Submit" Command="{Binding SubmitCommand}" BackgroundColor="#00C569" TextColor="White" FontAttributes="Bold" CornerRadius="25" HeightRequest="50" Margin="0,10,0,0"/>
+
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
