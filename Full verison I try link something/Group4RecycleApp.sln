@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36623.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Group4RecycleApp", "Group4RecycleApp\Group4RecycleApp.csproj", "{AD722965-0265-4A2F-BBC3-98FFB4FC9C03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E1.Backend.Api", "E1.Backend.Api\E1.Backend.Api.csproj", "{75D36FBA-022E-0476-01BE-ED9672BB1C0E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD722965-0265-4A2F-BBC3-98FFB4FC9C03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD722965-0265-4A2F-BBC3-98FFB4FC9C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD722965-0265-4A2F-BBC3-98FFB4FC9C03}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AD722965-0265-4A2F-BBC3-98FFB4FC9C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD722965-0265-4A2F-BBC3-98FFB4FC9C03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75D36FBA-022E-0476-01BE-ED9672BB1C0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75D36FBA-022E-0476-01BE-ED9672BB1C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75D36FBA-022E-0476-01BE-ED9672BB1C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75D36FBA-022E-0476-01BE-ED9672BB1C0E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6764F9E-0A73-40B5-B78F-1D57F7022566}
+	EndGlobalSection
+EndGlobal
