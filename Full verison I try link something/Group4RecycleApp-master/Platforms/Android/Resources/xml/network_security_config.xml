@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    这是修复 "Connection failure" 必需的文件
+    它告诉 Android APP 允许连接到非加密的 (http) 10.0.2.2 地址。
+-->
+<network-security-config>
+	<domain-config cleartextTrafficPermitted="true">
+		<!-- 允许连接到您的PC (10.0.2.2 是模拟器地址) -->
+		<domain includeSubdomains="true">10.0.2.2</domain>
+	</domain-config>
+</network-security-config>

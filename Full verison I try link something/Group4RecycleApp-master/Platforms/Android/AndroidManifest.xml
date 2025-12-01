@@ -1,0 +1,26 @@
+﻿<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<application
+		android:allowBackup="true"
+		android:icon="@mipmap/appicon"
+		android:roundIcon="@mipmap/appicon_round"
+		android:supportsRtl="true"
+		android:networkSecurityConfig="@xml/network_security_config"
+		android:hardwareAccelerated="true">
+	</application>
+
+	<!-- 网络权限 (原本就有的) -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+
+	<!-- 👇👇👇 [新增] 相机与相册权限 👇👇👇 -->
+	<uses-permission android:name="android.permission.CAMERA" />
+
+	<!-- 读取/写入外部存储 (为了选照片) -->
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+	<!-- 声明 App 使用相机功能，但不是必须的 (防止不带相机的设备无法安装) -->
+	<uses-feature android:name="android.hardware.camera" android:required="false" />
+
+</manifest>
