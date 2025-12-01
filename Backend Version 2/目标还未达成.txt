@@ -1,0 +1,20 @@
+目前我认为缺乏的东西：
+1. Push Notification - App可以发通知
+2. firebase storage - 储存那些上传的照片和用户头像（前端直接上传 (最省事，Backend 几乎不用动)） （Azure SQL不好，并且也贵）
+3. Azure SQL - 这个还是需要来储存用户的数据~替换原有的SQlite
+4. Maps - AI说APP的可以免费，网站才收费。要不然就花点钱。
+5. Backend 上传 Azure - 变成线上随时访问
+
+
+
+Firebase Storage(原理):
+你的 App (Maui/Android) 拍照。
+
+App 使用 Firebase 的 SDK 直接把图片甩给 Firebase Storage。
+
+Firebase Storage 返回给 App 一个链接：https://.../photo.jpg。
+
+App 把这个链接字符串发给你的 Backend API。
+
+Backend：IncidentController 收到字符串，存进 SQL 数据库。完事！
+
